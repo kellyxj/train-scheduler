@@ -19,7 +19,7 @@ function makeTrain(tName, tDest, tFreq, tFirst) {
 //This function will be called whenever a train is added or removed. It will add the contents of the trains array to HTML.
 //It will also be called once per second to ensure that the "minutes away" column of the table is updated in real time.
 function updateTable() {
-    $("#trains").clear();
+    $("#trains").empty();
     for(i = 0; i < trains.length; i++) {
         const row = $("<tr>");
         const trainName = $("<td>");
