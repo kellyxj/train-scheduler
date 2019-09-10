@@ -29,7 +29,7 @@ function updateTable() {
         trainName.text(trains[i].name);
         trainDest.text(trains[i].dest);
         trainFreq.text(trains[i].freq);
-        nextArrival.text(moment().add(trains[i].getMinsToArrival(),"minutes").format("hh:mm"));
+        nextArrival.text(moment().add(trains[i].getMinsToArrival(),"minutes").format("HH:mm"));
         minutesAway.text(trains[i].getMinsToArrival());
         row.append(trainName, trainDest, trainFreq, nextArrival, minutesAway);
         $("#trains").append(row);
