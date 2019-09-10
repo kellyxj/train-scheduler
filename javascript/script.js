@@ -10,6 +10,7 @@ function makeTrain(tName, tDest, tFreq, tFirst) {
         getMinsToArrival() {
             let firstTime = moment().set("hour",this.first.substring(0,2)).set("minute", this.first.substring(3));
             let duration = moment.duration(moment().diff(firstTime));
+            console.log(firstTime.format());
             return this.freq - (Math.floor(duration.asMinutes()) % this.freq);
         }
     }
@@ -39,6 +40,7 @@ function updateTable() {
 $(document).ready(() => {
     $("#submit").on("click", (e) => {
         e.preventDefault();
-
+        makeTrain($("#trainName").val(),$("#dest").val(),$("#freq").val(),$("#firstTime").val());
+        updateTable();
     });
 });
