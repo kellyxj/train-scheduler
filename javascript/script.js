@@ -1,3 +1,17 @@
+//Initializing firebase
+var firebaseConfig = {
+    apiKey: "AIzaSyAY0xyra_GAcE1wal7SrAzkQlweeWEV3Hs",
+    authDomain: "bootcamp-2b209.firebaseapp.com",
+    databaseURL: "https://bootcamp-2b209.firebaseio.com",
+    projectId: "bootcamp-2b209",
+    storageBucket: "",
+    messagingSenderId: "778638094382",
+    appId: "1:778638094382:web:81ab3bbe83156821"
+};
+firebase.initializeApp(firebaseConfig);
+
+const database = firebase.database();
+
 //Holds train objects
 const trains = [];
 
@@ -7,6 +21,7 @@ function makeTrain(tName, tDest, tFreq, tFirst) {
         dest: tDest,
         freq: tFreq,
         first: tFirst,
+        //returns, as minutes the amount of time until the next train arrives
         getMinsToArrival() {
             let firstTime = moment().set("hour",this.first.substring(0,2)).set("minute", this.first.substring(3));
             let duration = moment.duration(moment().diff(firstTime));
@@ -40,7 +55,15 @@ function updateTable() {
 $(document).ready(() => {
     $("#submit").on("click", (e) => {
         e.preventDefault();
-        makeTrain($("#trainName").val(),$("#dest").val(),$("#freq").val(),$("#firstTime").val());
+        database.ref().push({
+            name: $("#trainName").val(),
+            destination: $("#dest").val(),
+            frequency: $("#freq").val(),
+            firstTime: $("#firstTime").val()
+        });
+    });
+    database.ref().on("child_added", (snapshot) => {
+        makeTrain(snapshot.name, snapshot.destination, snapshot.frequency, snapshot.firstTime);
         updateTable();
     });
     setInterval(() => {
