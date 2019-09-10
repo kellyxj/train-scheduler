@@ -8,7 +8,7 @@ function makeTrain(tName, tDest, tFreq, tFirst) {
         freq: tFreq,
         first: tFirst,
         getMinsToArrival() {
-            let firstTime = moment().set("hour",this.first.substring(0,2)).set("minute", this.first.substring(4));
+            let firstTime = moment().set("hour",this.first.substring(0,2)).set("minute", this.first.substring(3));
             let duration = moment.duration(moment().diff(firstTime));
             return this.freq - (Math.floor(duration.asMinutes()) % this.freq);
         }
