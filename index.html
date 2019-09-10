@@ -24,14 +24,17 @@
     <script src="javascript/script.js"></script>
 </head>
 <body>
-    <table class="table" id="trains">
-        <tr>
+    <table class="table">
+        <thead>
+            <tr>
             <th scope="col">Train Name</th>
             <th scope="col">Destination</th>
             <th scope="col">Frequency</th>
             <th scope="col">Next Arrival Time</th>
             <th scope="col">Minutes Away</th>
-        </tr>
+            </tr>
+        </thead>  
+        <tbody id = "trains"></tbody>
     </table>
     <form>
         Add a new train:
