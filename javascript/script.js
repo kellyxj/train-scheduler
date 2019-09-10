@@ -13,13 +13,26 @@ function makeTrain(tName, tDest, tFreq, tFirst) {
             return this.freq - (Math.floor(duration.asMinutes()) % this.freq);
         }
     }
+    trains.push(train);
 }
 
 //This function will be called whenever a train is added or removed. It will add the contents of the trains array to HTML.
 //It will also be called once per second to ensure that the "minutes away" column of the table is updated in real time.
 function updateTable() {
     for(i = 0; i < trains.length; i++) {
-        
+        const row = $("<tr>");
+        const trainName = $("<td>");
+        const trainDest = $("<td>");
+        const trainFreq = $("<td>");
+        const nextArrival = $("<td>");
+        const minutesAway = $("<td>");
+        trainName.text(trains[i].name);
+        trainDest.text(trains[i].dest);
+        trainFreq.text(trains[i].freq);
+        nextArrival.text(moment().add(trains[i].getMinsToArrival(),"minutes").format("hh:mm"));
+        minutesAway.text(trains[i].getMinsToArrival());
+        row.append(trainName, trainDest, trainFreq, nextArrival, minutesAway);
+        $("#trains").append(row);
     }
 }
 
