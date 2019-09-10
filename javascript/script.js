@@ -63,7 +63,7 @@ $(document).ready(() => {
         });
     });
     database.ref().on("child_added", (snapshot) => {
-        makeTrain(snapshot.name, snapshot.destination, snapshot.frequency, snapshot.firstTime);
+        makeTrain(snapshot.val().name, snapshot.val().destination, snapshot.val().frequency, snapshot.val().firstTime);
         updateTable();
     });
     setInterval(() => {
